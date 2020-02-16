@@ -1,0 +1,11 @@
+<!doctype html>
+<table>
+<th align="left">Post</th>
+<th align="left">Claps</th>
+{% for r in result %}
+<tr>
+    <td>{{ r['url'] }}</td>
+    <td>{{ r['claps'] }}</td>
+</tr>
+{% endfor %}
+</table>
