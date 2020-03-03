@@ -16,7 +16,7 @@ http_root = "wlog.viltstigen.se/"
 
 @app.route("/claps")
 def get_claps():
-    #  Note, applause-botton api allows maximum 100 items in once call to get-multiple
+    #  Note, applause-button api allows maximum 100 items in once call to get-multiple
     pages = []
     data = []
     #  data = ["google.com"] * 101  # For testing
