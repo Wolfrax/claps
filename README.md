@@ -18,13 +18,25 @@ Installation
     $ pip3 install gunicorn
     
 As ufw allows incoming connection from all nodes on subnet 192.168.1.X, no ufw updates are needed.
-Configure gunicorn and have supervisor monitor.
+Configure gunicorn and have systemd monitor. Create this script and place in `/home/pi/rpi2/etc/systemd/user`, call
+the script `claps.service`:
 
-    $ sudo ln -s /home/pi/app/claps/claps_gunicorn.conf /etc/supervisor/conf.d/claps_gunicorn.conf
-    $ sudo supervisorctl reread
-    claps_gunicorn: available
-    $ sudo supervisorctl update
-    claps_gunicorn: added process group
-    $ sudo supervisorctl status
-    claps_gunicorn                   RUNNING   pid 22233, uptime 0:00:09
-
+    [Unit]
+    Description=Wlog claps
+    After=network.target
+    
+    [Service]
+    # To enable this, systemctl needs to be done in the following order
+    #   $ sudo systemctl enable /home/pi/rpi2/etc/systemd/user/claps.service
+    #   $ sudo systemctl start claps.service
+    # The first (enable) command will create symlink and enable the service so it get started at reboot
+    #
+    Type=simple
+    WorkingDirectory=/home/pi/app/claps
+    User=pi
+    Group=www-data
+    ExecStart=/home/pi/app/claps/venv/bin/gunicorn -b :8098 --reload claps:app
+    Restart=always
+    
+    [Install]
+    WantedBy=multi-user.target
