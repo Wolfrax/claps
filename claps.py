@@ -18,7 +18,7 @@ http_root = "wlog.viltstigen.se/"
 def get_claps():
     #  Note, applause-button api allows maximum 100 items in once call to get-multiple
     pages = []
-    data = []
+    data = [http_root]
     #  data = ["google.com"] * 101  # For testing
     for root, dirs, files in os.walk(father_root + "articles"):
         if not dirs:
