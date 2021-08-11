@@ -38,10 +38,14 @@ def get_claps():
                 res += r.json()
 
     result = []
+    no_claps = 0
     for item in res:
         url = item['url'].split("/")[-2] if "/" in item['url'] else item['url']
         result.append({'url': url, 'claps': item['claps']})
+        no_claps += int(item['claps'])
 
+    result = sorted(result, key=lambda i: i['claps'])
+    result.append({'url': 'Total', 'claps': str(no_claps)})
     return render_template("claps.html", result=result)
 
 
