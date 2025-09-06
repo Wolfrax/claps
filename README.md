@@ -1,6 +1,8 @@
 Claps
 =====
 
+__Note!__ Not used anymore (2025-09-06)
+
 Finds all blog pages in the Pelican output directory (set by "father_root", see claps.py) by traversing the directory
 tree. Then calling "https://api.applause-button.com/get-multiple" with a json-list of the blog pages (care taken that
 get-multiple does not allow more than 100 entries in the list at the same time). The returned value is parsed and
